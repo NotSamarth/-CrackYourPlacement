@@ -1,56 +1,41 @@
+#include <stack>
+
 class MyQueue {
-
-    Stack <Integer> myStack;
-    Stack<Integer> queueOfStack;
-
-    public MyQueue() {
-        
-        myStack = new Stack<>();
-        queueOfStack = new Stack<>();
-
+public:
+    MyQueue() {}
+    
+    void push(int x) {
+        stack1.push(x);
     }
     
-    public void push(int x) {
-
-        // loop to transfer all elements from stack1 to stack2
-
-        while(!myStack.isEmpty())
-        {
-            queueOfStack.push(myStack.pop());
+    int pop() {
+        if (stack2.empty()) {
+            transferElements();
         }
-
-        // push the new element to stack1
-        myStack.push(x);
-
-        // loop to transfer all elements back from stack2 to stack1
-         while(!queueOfStack.isEmpty())
-        {
-            myStack.push(queueOfStack.pop());
+        int front = stack2.top();
+        stack2.pop();
+        return front;
+    }
+    
+    int peek() {
+        if (stack2.empty()) {
+            transferElements();
         }
-        
+        return stack2.top();
     }
     
-    public int pop() {
+    bool empty() {
+        return stack1.empty() && stack2.empty();
+    }
 
-        return myStack.pop();
-        
-    }
+private:
+    std::stack<int> stack1;
+    std::stack<int> stack2;
     
-    public int peek() {
-        
-        return myStack.peek();
+    void transferElements() {
+        while (!stack1.empty()) {
+            stack2.push(stack1.top());
+            stack1.pop();
+        }
     }
-    
-    public boolean empty() {
-        return myStack.isEmpty();
-    }
-}
-
-/**
- * Your MyQueue object will be instantiated and called as such:
- * MyQueue obj = new MyQueue();
- * obj.push(x);
- * int param_2 = obj.pop();
- * int param_3 = obj.peek();
- * boolean param_4 = obj.empty();
- */
+};
