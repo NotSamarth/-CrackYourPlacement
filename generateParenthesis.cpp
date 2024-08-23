@@ -6,6 +6,7 @@ public:
             res.push_back(str);
             return;
         }
+        
         if(a==n){
             solve(str+')',a,b+1,n);
         }
