@@ -2,6 +2,7 @@
     "files.associations": {
         "*.ejs": "html",
         "xutility": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "utility": "cpp"
     }
 }
